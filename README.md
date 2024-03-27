@@ -92,3 +92,32 @@ type GroupCardProps = TouchableOpacityProps & {
   title: string;
 };
 ```
+
+### CSS Helper do StyledComponents
+
+Quando há o uso de muitas variáveis como `theme`, `type`, `variant` e outras em um componente só pode ser que o `css` helper do styled-components contribua em termos de simplificar a sintaxe.
+
+```ts
+import styled, { css } from 'styled-components/native';
+
+//Com isso `theme` não precisa ser desestruturado em todas propriedades.
+export const NumbersOfPlayers = styled.Text`
+  ${({ theme }) => css`
+    color: ${theme.COLORS.GRAY_200};
+    font-family: ${theme.FONT_FAMILY.BOLD};
+    font-size: ${theme.FONT_SIZE.SM}px;
+  `};
+`;
+```
+
+### 'keyof' 'typeof' Typescript para tipagem
+
+Quando temos uma listagem de possíveis chaves que podem ser usadas em um atributo, por exemplo, de uma biblioteca de iconografia, pode ser interessante deixarmos explícito na tipagem do componente os ícones aceitos. Segue exemplo:
+
+```ts
+import { MaterialIcons } from '@expo/vector-icons';
+
+type ButtonIconProps = TouchableOpacityProps & {
+  icon: keyof typeof MaterialIcons.glyphMap;
+};
+```
