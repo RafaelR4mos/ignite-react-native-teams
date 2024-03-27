@@ -121,3 +121,23 @@ type ButtonIconProps = TouchableOpacityProps & {
   icon: keyof typeof MaterialIcons.glyphMap;
 };
 ```
+
+### Navegação com React Navigate
+
+1. Instalar a biblioteca core React Navigation
+
+```bash
+npm install @react-navigation/native
+```
+
+2. Instalar dependências para projetos `expo`
+
+```bash
+npx expo install react-native-screens react-native-safe-area-context
+```
+
+3. Instalar a estratégia de navegação (Stack, Drawer, Tab)
+
+```bash
+npm install @react-navigation/native-stack
+```
