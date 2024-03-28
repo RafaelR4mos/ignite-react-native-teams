@@ -1,5 +1,9 @@
 # React Native - Ignite Teams
 
+<p align="center">
+  <img src="./assets/teams-home.jpg"/>
+<p/>
+
 ## Tecnologias
 
 ### React Native svg e ícones
@@ -142,6 +146,57 @@ npx expo install react-native-screens react-native-safe-area-context
 
 ```bash
 npm install @react-navigation/native-stack
+```
+
+2. Declarando o `contexto` das rotas e `rotas`:
+
+`routes/app.routes.tsx`
+
+```tsx
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import { Groups } from '../screens/Groups';
+
+const { Navigator, Screen } = createNativeStackNavigator();
+
+//Navigator --> Envolve as rotas
+//Screen --> Rota individual com nome e apontando para componente
+export function AppRoutes() {
+  return (
+    <Navigator screenOptions={{ headerShown: false }}>
+      <Screen
+        name="groups"
+        component={Groups}
+      />
+    </Navigator>
+  );
+}
+```
+
+3. Expondo as rotas na hierarquia da aplicação
+
+`index.tsx`
+
+```tsx
+import { NavigationContainer } from '@react-navigation/native';
+import { useTheme } from 'styled-components/native';
+import { AppRoutes } from './app.routes';
+import { View } from 'react-native';
+
+export function Routes() {
+  const { COLORS } = useTheme();
+
+  //NavigationContainer --> Fornece o contexto de navegação para o app.
+  // * A estilização da view remove o glitch effect ao trocar de página.
+
+  return (
+    <View style={{ flex: 1, backgroundColor: COLORS.GRAY_600 }}>
+      <NavigationContainer>
+        <AppRoutes />
+      </NavigationContainer>
+    </View>
+  );
+}
 ```
 
 #### Tipando as rotas em `@types/`
